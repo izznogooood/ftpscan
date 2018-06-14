@@ -1,7 +1,8 @@
   
 # ftpscan
 
-Scan provided subnet for ftp-servers with provided username / password.
+Scan provided subnet for ftp-servers with provided username / password.  
+*default password scanning*
 
 ## Getting Started
 
