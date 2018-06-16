@@ -23,7 +23,7 @@ def scan(cidr, user, password):
     :param cidr: Subnet, <192.168.0.0/24>
     :param user: Username to attempt login.
     :param password: Password to attempt login
-    :return: IP list of successful login's.
+    :return: IP [list] of successful login's.
     """
     network = ipaddress.ip_network(cidr)
     result = []
