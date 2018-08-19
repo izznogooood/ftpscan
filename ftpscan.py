@@ -10,7 +10,7 @@ import os
 def main():
     """ Main Program """
 
-    # todo: add multithreading
+    # todo: implement multiprocessing
 
     result = scan(args.cidr, args.user, args.password)
     if args.file:
