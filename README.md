@@ -1,7 +1,11 @@
   
 # ftpscan
 
-Scan provided subnet for ftp-servers with provided username / password.  
+Scans approximately 1 subnet (254 addresses) in 2,5sec.
+
+Scan provided subnet for ftp-servers (or IoT-Devices with ftp-login) with provided 
+username / password.  
+
 *default password scanning*
 
 ## Getting Started
@@ -25,6 +29,7 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -f FILE, --file FILE  Filename to store results.
+  -v, --verbose         Verbose output
 ```
 
 ### Prerequisites

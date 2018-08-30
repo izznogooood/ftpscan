@@ -2,10 +2,10 @@ import time
 import ftplib
 import socket
 from contextlib import closing
-from multiprocessing import Process, Manager, Pool
+from multiprocessing import Process, Manager, Pool, freeze_support
 import ipaddress
 
-
+# function head for manager
 # def attempt_ftp_login(ip, user, password, result_list: list):
 #
 #     try:
@@ -16,6 +16,8 @@ import ipaddress
 #             print('{} Successful login.'.format(ip))
 #             result_list.append(ip)
 
+
+# rebuilt function to take a list for pool
 def attempt_ftp_login(info: list):
     if len(info) != 3:
         raise Exception('attempt_ftp_login: Wrong number of arguments given')
@@ -50,21 +52,24 @@ hosts = [
     for ip in targets.hosts()
 ]
 
-# with a pool
-start = time.time()
-p = Pool(processes=254)
-result_list = p.map(attempt_ftp_login, hosts)
-result_list = [
-    ip
-    for ip in result_list
-    if ip
-]
-print()
-print('Results:')
-for ip in result_list:
-    print(ip)
-end = time.time()
-print(end - start)
+if __name__ == '__main__':
+
+    # with a pool
+    start = time.time()
+    freeze_support()  # necessary for windows
+    p = Pool(processes=254)
+    result_list = p.map(attempt_ftp_login, hosts)
+    result_list = [
+        ip
+        for ip in result_list
+        if ip
+    ]
+    print()
+    print('Results:')
+    for ip in result_list:
+        print(f'{ip} login success!')
+    end = time.time()
+    print(end - start)
 
 
 # With a manager

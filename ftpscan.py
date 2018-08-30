@@ -5,50 +5,87 @@ import ipaddress
 import socket
 import argparse
 import os
+from contextlib import closing
+from multiprocessing import Pool, freeze_support
+
+
+def parse_arguments():
+    """
+    Initialize CLI arguments
+    """
+    global args
+    parser = argparse.ArgumentParser(
+        description='Scans for ftp-servers with provided user / password'
+    )
+    parser.add_argument('cidr', help='Subnet to scan <192.168.0.0/24>')
+    parser.add_argument('user', help='<username> to attempt login.')
+    parser.add_argument('password', help='<password> to attempt login.')
+    parser.add_argument('-f', '--file', help='Filename to store results.')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Verbose output')
+    args = parser.parse_args()
 
 
 def main():
     """ Main Program """
 
-    # todo: implement multiprocessing
+    targets = ipaddress.ip_network(args.cidr)
+    target_list = [
+        [str(ip), args.user, args.password]
+        for ip in targets.hosts()
+    ]
 
-    result = scan(args.cidr, args.user, args.password)
+    freeze_support()
+    p = Pool(processes=254)
+    result = p.map(attempt_ftp_login, target_list)
+    clean_list = [
+        ip
+        for ip in result
+        if ip
+    ]
+
+    print('')
+    print('###########################')
+    print('#        RESULTS          #')
+    print('###########################')
+    print('')
+    for ip in clean_list:
+        print('{} login success!'.format(ip))
+
     if args.file:
-        _write_results(result, os.path.join(os.getcwd(), args.file))
+        _write_results(clean_list, os.path.join(os.getcwd(), args.file))
 
 
-def scan(cidr, user, password):
-    """
-    Scan provided subnet for ftp access with provided user/password.
-    :param cidr: Subnet, <192.168.0.0/24>
-    :param user: Username to attempt login.
-    :param password: Password to attempt login
-    :return: IP [list] of successful login's.
-    """
-    network = ipaddress.ip_network(cidr)
-    result = []
+def attempt_ftp_login(login_info: list):
+    if len(login_info) != 3:
+        raise Exception('attempt_ftp_login: Wrong number of arguments given')
 
-    for ip in network.hosts():
-        try:
-            ftp = ftplib.FTP(host=str(ip), timeout=2)
+    ip = login_info[0]
+    user = login_info[1]
+    password = login_info[2]
+
+    try:
+        with closing(ftplib.FTP(host=str(ip), timeout=2))as ftp:
             feedback = ftp.login(user, password)
             ftp.quit()
-            if feedback == '230 User logged in, proceed.':
-                result.append(str(ip))
+        if feedback == '230 User logged in, proceed.':
+            if args.verbose:
                 print('{} Successful login.'.format(ip))
+            return ip
 
-        except KeyboardInterrupt:
-            exit()
-        except ConnectionRefusedError:
+    except KeyboardInterrupt:
+        exit()
+    except ConnectionRefusedError:
+        if args.verbose:
             print('{} Connection refused.'.format(ip))
-        except ftplib.error_perm:
+    except ftplib.error_perm:
+        if args.verbose:
             print('{} Wrong user/password.'.format(ip))
-        except socket.timeout:
+    except socket.timeout:
+        if args.verbose:
             print("{} Timeout.".format(ip))
-        except:
+    except:
+        if args.verbose:
             print("{} Unknown error.".format(ip))
-
-    return result
 
 
 def _write_results(result, filename):
@@ -64,15 +101,5 @@ def _write_results(result, filename):
 
 
 if __name__ == '__main__':
-
-    # Initialize CLI arguments
-
-    parser = argparse.ArgumentParser(
-        description='Scans for ftp-servers with provided user / password'
-    )
-    parser.add_argument('cidr', help='Subnet to scan <192.168.0.0/24>')
-    parser.add_argument('user', help='<username> to attempt login.')
-    parser.add_argument('password', help='<password> to attempt login.')
-    parser.add_argument('-f', '--file', help='Filename to store results.')
-    args = parser.parse_args()
+    parse_arguments()
     main()
