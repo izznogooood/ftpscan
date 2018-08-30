@@ -1,7 +1,7 @@
   
 # ftpscan
 
-Scans approximately 1 subnet (254 addresses) in 2,5sec.
+Scans approximately one /24 subnet (254 addresses) in 2,5sec.
 
 Scan provided subnet for ftp-servers (or IoT-Devices with ftp-login) with provided 
 username / password.  
