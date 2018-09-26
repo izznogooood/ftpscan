@@ -6,7 +6,7 @@ Scans approximately one /24 subnet (254 addresses) in 2,5sec.
 Scan provided subnet for ftp-servers (or IoT-Devices with ftp-login) with provided 
 username / password.  
 
-*default password scanning*
+*made for the purpose of catching IOT devices with default password on internal networks*
 
 ## Getting Started
 
