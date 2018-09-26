@@ -43,19 +43,28 @@ def main():
         if ip
     ]
 
+    print_banner()
+    for ip in clean_list:
+        print('{} login success!'.format(ip))
+
+    if args.file:
+        write_results(clean_list, os.path.join(os.getcwd(), args.file))
+
+
+def print_banner():
     print('')
     print('###########################')
     print('#        RESULTS          #')
     print('###########################')
     print('')
-    for ip in clean_list:
-        print('{} login success!'.format(ip))
-
-    if args.file:
-        _write_results(clean_list, os.path.join(os.getcwd(), args.file))
 
 
 def attempt_ftp_login(login_info: list):
+    """
+    Attempts FTP login and returns IP of successful login.
+    :param login_info: list: IP,USER,PASSWORD
+    :return: str: IP of successful login
+    """
     if len(login_info) != 3:
         raise Exception('attempt_ftp_login: Wrong number of arguments given')
 
@@ -88,7 +97,7 @@ def attempt_ftp_login(login_info: list):
             print("{} Unknown error.".format(ip))
 
 
-def _write_results(result, filename):
+def write_results(result, filename):
     """
     Writes a list / tuple item by item to a file.
     :param result: IP list of successful login's.
