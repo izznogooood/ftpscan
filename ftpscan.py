@@ -9,7 +9,7 @@ from contextlib import closing
 from multiprocessing import Pool, freeze_support
 
 
-def parse_arguments():
+def _parse_arguments():
     """
     Initialize CLI arguments
     """
@@ -101,5 +101,5 @@ def _write_results(result, filename):
 
 
 if __name__ == '__main__':
-    parse_arguments()
+    _parse_arguments()
     main()
