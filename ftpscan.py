@@ -34,21 +34,37 @@ def main():
         for ip in targets.hosts()
     ]
 
+    workers = 256
+    result = multiprocessor(attempt_ftp_login, target_list, workers)
+    if result:
+        print_banner()
+        for ip in result:
+            print('{} login success!'.format(ip))
+    else:
+        print('No results...')
+
+    if args.file:
+        write_results(result, os.path.join(os.getcwd(), args.file))
+
+
+def multiprocessor(funktion, data, workers):
+    """
+    Multiprocessing function. Passes the function and data along with the number of workers.
+
+    :param funktion: The function to multiprocess.
+    :param workers: The number of workers.
+    :param data: The data to pass to the function that's being multiprocess'd.
+    :return: A cleaned list of successful login's.
+    """
     freeze_support()
-    p = Pool(processes=254)
-    result = p.map(attempt_ftp_login, target_list)
+    p = Pool(processes=workers)
+    result = p.map(funktion, data)
     clean_list = [
         ip
         for ip in result
         if ip
     ]
-
-    print_banner()
-    for ip in clean_list:
-        print('{} login success!'.format(ip))
-
-    if args.file:
-        write_results(clean_list, os.path.join(os.getcwd(), args.file))
+    return clean_list
 
 
 def print_banner():
