@@ -1,0 +1,28 @@
+base: core18
+name: ftpscan
+version: '1.0'
+summary: Simple ftp scanning for default username / password.
+description: |
+    positional arguments:
+      cidr                  Subnet to scan <192.168.0.0/24>
+      user                  <username> to attempt login.
+      password              <password> to attempt login.
+
+    optional arguments:
+      -h, --help            show this help message and exit
+      -f FILE, --file FILE  Filename to store results.
+      -v, --verbose         Verbose output
+grade: stable
+confinement: devmode
+
+apps:
+  ftpscan:
+    command: ftpscan
+    plugs: [network]
+
+parts:
+  ftpscan:
+    source: https://github.com/izznogooood/ftpscan.git
+    source-tag: master
+    plugin: python
+

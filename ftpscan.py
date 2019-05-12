@@ -28,6 +28,7 @@ def _parse_arguments():
 def main():
     """ Main Program """
 
+    _parse_arguments()
     targets = ipaddress.ip_network(args.cidr)
     target_list = [
         [str(ip), args.user, args.password]
@@ -126,5 +127,4 @@ def write_results(result, filename):
 
 
 if __name__ == '__main__':
-    _parse_arguments()
     main()
