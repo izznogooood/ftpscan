@@ -13,7 +13,7 @@ description: |
       -f FILE, --file FILE  Filename to store results.
       -v, --verbose         Verbose output
 grade: stable
-confinement: devmode
+confinement: strict
 
 apps:
   ftpscan:
