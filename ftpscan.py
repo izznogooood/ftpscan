@@ -7,6 +7,7 @@ import argparse
 import os
 from contextlib import closing
 from multiprocessing import Pool, freeze_support
+from sys import exit
 
 
 def _parse_arguments():
@@ -29,7 +30,13 @@ def main():
     """ Main Program """
 
     _parse_arguments()
-    targets = ipaddress.ip_network(args.cidr)
+
+    try:
+        targets = ipaddress.ip_network(args.cidr)
+    except:
+        print('Not a valid CIDR.')
+        exit(1)
+
     target_list = [
         [str(ip), args.user, args.password]
         for ip in targets.hosts()

@@ -17,10 +17,18 @@ confinement: strict
 
 apps:
   ftpscan:
-    command: ftpscan
+    command: bin/snapcraft-preload $SNAP/bin/ftpscan
     plugs: [network]
 
 parts:
+  # Multitasking preLoad
+  snapcraft-preload:
+    source: https://github.com/diddledan/snapcraft-preload.git
+    plugin: cmake
+    build-packages:
+      - on amd64:
+          - gcc-multilib
+          - g++-multilib
   ftpscan:
     source: https://github.com/izznogooood/ftpscan.git
     source-tag: master
