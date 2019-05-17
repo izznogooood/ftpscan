@@ -46,6 +46,7 @@ optional arguments:
 ```
 
 ### Prerequisites
+**(Snap has no prerequisites)**
 
 What do I need to run this thing?
 
