@@ -1,6 +1,6 @@
 base: core18
 name: ftpscan
-version: '1.0'
+version: '1.0-1'
 summary: Simple ftp scanner for default username / password.
 description: |
     Scan provided subnet for ftp-servers (or IoT-Devices with ftp-login) with provided

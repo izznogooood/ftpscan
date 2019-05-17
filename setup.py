@@ -12,7 +12,7 @@ def get_long_description():
 
 setup(
     name='ftpscan',
-    version='1.0',
+    version='1.0-1',
     url='https://github.com/izznogooood/ftpscan',
     license='MIT',
     author='Anders Magnus Andersen',

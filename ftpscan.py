@@ -33,14 +33,13 @@ def main():
 
     try:
         targets = ipaddress.ip_network(args.cidr)
+        target_list = [
+            [str(ip), args.user, args.password]
+            for ip in targets.hosts()
+        ]
     except:
-        print('Not a valid CIDR.')
+        print('Invalid CIDR...')
         exit(1)
-
-    target_list = [
-        [str(ip), args.user, args.password]
-        for ip in targets.hosts()
-    ]
 
     workers = 256
     result = multiprocessor(attempt_ftp_login, target_list, workers)
