@@ -13,10 +13,16 @@ username / password.
 ```
 git clone https://github.com/izznogooood/ftpscan.git
 cd ftpscan
+
 python ftpscan.py <cidr> <username> <password>
+
+# or
+python setup.py install
+ftpscan <cidr> <username> <password>
+
 ```
 
-What python command you use varies on different operating systems.
+What python command you use varies on different operating systems / Python installations.
 
 ### Help Content:
 
@@ -42,4 +48,4 @@ Python 3,5
 
 ### What is CIDR?
 
-https://mxtoolbox.com/subnetcalculator.aspx
+https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
