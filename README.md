@@ -9,7 +9,14 @@ username / password.
 *made for the purpose of catching IOT devices with default password on internal networks*
 
 ## Getting Started
+#### Linux distro with snap support
+```
+snap install ftpscan
+ftpscan <cidr> <username> <password>
+```
 
+
+#### No snap support / Or on windows / MAC
 ```
 git clone https://github.com/izznogooood/ftpscan.git
 cd ftpscan
