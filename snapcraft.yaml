@@ -24,6 +24,7 @@ parts:
   # Multitasking preLoad
   snapcraft-preload:
     source: https://github.com/diddledan/snapcraft-preload.git
+    source-branch: semaphore-support
     plugin: cmake
     build-packages:
       - on amd64:
