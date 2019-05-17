@@ -16,7 +16,7 @@ ftpscan <cidr> <username> <password>
 ```
 
 
-#### No snap support / Or on windows / MAC
+#### No snap support / Or on Windows/MAC
 ```
 git clone https://github.com/izznogooood/ftpscan.git
 cd ftpscan
