@@ -3,15 +3,12 @@ name: ftpscan
 version: '1.0'
 summary: Simple ftp scanning for default username / password.
 description: |
-    positional arguments:
-      cidr                  Subnet to scan <192.168.0.0/24>
-      user                  <username> to attempt login.
-      password              <password> to attempt login.
+    Scans approximately one /24 subnet (254 addresses) in 2,5sec.
 
-    optional arguments:
-      -h, --help            show this help message and exit
-      -f FILE, --file FILE  Filename to store results.
-      -v, --verbose         Verbose output
+    Scan provided subnet for ftp-servers (or IoT-Devices with ftp-login) with provided
+    username / password.
+
+    Made for the purpose of catching IOT devices with default password on internal networks.
 grade: stable
 confinement: strict
 
