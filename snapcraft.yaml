@@ -18,7 +18,7 @@ apps:
     plugs: [network]
 
 parts:
-  # Multitasking preLoad
+  # Semaphore-support (Python multitasking)
   snapcraft-preload:
     source: https://github.com/diddledan/snapcraft-preload.git
     source-branch: semaphore-support
