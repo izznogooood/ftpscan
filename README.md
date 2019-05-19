@@ -28,12 +28,12 @@ python setup.py install
 
 What python command you use varies on different operating systems / Python installations.
 
-### Basic Usage
+## Basic Usage
 ```
 ftpscan <cidr> <username> <password>
 ```
 
-### Help Content:
+## Help Content:
 
 ```
 positional arguments:
@@ -47,7 +47,7 @@ optional arguments:
   -v, --verbose         Verbose output
 ```
 
-### Prerequisites
+## Prerequisites
 *(Snap has no prerequisites)*
 
 What do I need to run this thing?
@@ -56,6 +56,6 @@ What do I need to run this thing?
 Python 3,5
 ```
 
-### What is CIDR?
+## What is CIDR?
 
 https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
