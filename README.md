@@ -8,7 +8,7 @@ username / password.
 
 *made for the purpose of catching IOT devices with default password on internal networks*
 
-## Getting Started
+## Install
 #### Linux distro with snap support
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-white.svg)](https://snapcraft.io/ftpscan)
@@ -23,16 +23,15 @@ ftpscan <cidr> <username> <password>
 ```
 git clone https://github.com/izznogooood/ftpscan.git
 cd ftpscan
-
-python ftpscan.py <cidr> <username> <password>
-
-# or
 python setup.py install
-ftpscan <cidr> <username> <password>
-
 ```
 
 What python command you use varies on different operating systems / Python installations.
+
+### Basic Usage
+```
+ftpscan <cidr> <username> <password>
+```
 
 ### Help Content:
 
