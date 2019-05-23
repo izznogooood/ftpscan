@@ -7,6 +7,7 @@ import argparse
 import os
 from contextlib import closing
 from multiprocessing import Pool, freeze_support
+import threading
 from sys import exit
 
 
@@ -33,7 +34,7 @@ def main():
 
     try:
         targets = ipaddress.ip_network(args.cidr)
-        target_list = [
+        target_data_list = [
             [str(ip), args.user, args.password]
             for ip in targets.hosts()
         ]
@@ -42,7 +43,7 @@ def main():
         exit(1)
 
     workers = 256
-    result = multiprocessor(attempt_ftp_login, target_list, workers)
+    result = multiprocessor(attempt_ftp_login, target_data_list, workers)
     if result:
         print_banner()
         for ip in result:
@@ -59,8 +60,8 @@ def multiprocessor(funktion, data, workers):
     Multiprocessing function. Passes the function and data along with the number of workers.
 
     :param funktion: The function to multiprocess.
-    :param workers: The number of workers.
     :param data: The data to pass to the function that's being multiprocess'd.
+    :param workers: The number of workers.
     :return: A cleaned list of successful login's.
     """
     freeze_support()
