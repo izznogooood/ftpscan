@@ -1,13 +1,15 @@
 #! /usr/bin/env python3
 
+import time
+
+
 import ftplib
 import ipaddress
 import socket
 import argparse
 import os
 from contextlib import closing
-from multiprocessing import Pool, freeze_support
-import threading
+from multiprocessing.dummy import Pool, freeze_support
 from sys import exit
 
 
@@ -28,6 +30,8 @@ def _parse_arguments():
 
 
 def main():
+
+    start_time = time.time()
     """ Main Program """
 
     _parse_arguments()
@@ -42,14 +46,17 @@ def main():
         print('Invalid CIDR...')
         exit(1)
 
-    workers = 256
+    workers = 1024
     result = multiprocessor(attempt_ftp_login, target_data_list, workers)
     if result:
         print_banner()
         for ip in result:
             print('{} login success!'.format(ip))
+        print(round(time.time() - start_time, 2))
+
     else:
         print('No results...')
+        print(round(time.time() - start_time, 2))
 
     if args.file:
         write_results(result, os.path.join(os.getcwd(), args.file))
