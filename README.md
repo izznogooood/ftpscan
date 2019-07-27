@@ -2,6 +2,7 @@
 # ftpscan
 
 Scans approximately one /24 subnet (254 addresses) in 2,5sec.
+(Has not been optimized, using multiprocessing.dummy in a large envoronment could increase efficiency ten fold...)
 
 Scan provided subnet for ftp-servers (or IoT-Devices with ftp-login) with provided 
 username / password.  
