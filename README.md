@@ -1,6 +1,8 @@
   
 # ftpscan
 
+*Discalimer: This is a proof of concept for another project and not actively maintained. It's stable but not tested*
+
 Scans approximately one /24 subnet (254 addresses) in 2,5sec.
 (Has not been optimized, using multiprocessing.dummy in a large envoronment could increase efficiency ten fold...)
 

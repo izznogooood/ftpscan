@@ -7,7 +7,6 @@ import argparse
 import os
 from contextlib import closing
 from multiprocessing import Pool, freeze_support
-import threading
 from sys import exit
 
 
